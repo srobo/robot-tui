@@ -35,6 +35,9 @@ pytest-asyncio = "*"
 rope = "*"
 isort = {version = "*",extras = ["pyproject"]}
 
+[tool.poetry.scripts]
+rtui = 'rtui.app:app'
+
 [build-system]
 requires = ["poetry>=0.12"]
 build-backend = "poetry.masonry.api"
