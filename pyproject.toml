@@ -3,12 +3,12 @@ name = "rtui"
 version = "0.1.0"
 description = "Robot Terminal User Interface for Student Robotics Kit"
 authors = [
-    "Dan Trickey <srobo-mcgowan@trickey.io>",
+    "Dan Trickey <srobo-rtui@trickey.io>",
 ]
 license = "MIT"
 readme = "README.md"
-repository = "https://github.com/trickeydan/mcgowan"
-homepage = "https://github.com/trickeydan/mcgowan"
+repository = "https://github.com/trickeydan/rtui"
+homepage = "https://github.com/trickeydan/rtui"
 classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
     "Typing :: Typed",
