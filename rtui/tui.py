@@ -19,7 +19,6 @@ class TUI:
         """Get a prompt session."""
         return PromptSession(
             message="> ",
-            placeholder="Enter a command, or help to list available commands!",
             validator=CommandValidator(),
             validate_while_typing=False,
         )
@@ -58,3 +57,4 @@ class TUI:
     async def welcome(self) -> None:
         """Print the welcome message."""
         self.print("Student Robotics OS")
+        self.print("Enter a command, or help to list available commands!")

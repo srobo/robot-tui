@@ -17,6 +17,11 @@ class CommandValidator(Validator):
         """
         command, args = parse_command(document.text)
 
+        if len(command) == 0:
+            raise ValidationError(
+                message="Enter a command, or help to list available commands!",
+            )
+
         try:
             errors = COMMANDS[command].validate_args(command, args)
             if errors:
