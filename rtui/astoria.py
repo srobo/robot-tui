@@ -3,6 +3,7 @@
 from json import JSONDecodeError, loads
 from typing import Match, Optional
 
+from astoria.common.broadcast_event import UsercodeLogBroadcastEvent
 from astoria.common.config import AstoriaConfig
 from astoria.common.consumer import StateConsumer
 from astoria.common.messages.astmetad import Metadata, MetadataManagerMessage
@@ -27,7 +28,11 @@ class AstoriaIntegration(StateConsumer):
         self._init()
 
     def _init(self) -> None:
+        # State Manager Messages
         self._mqtt.subscribe("astmetad", self.handle_astmetad_message)
+
+        # Broadcasts
+        self._mqtt.subscribe("broadcast/usercode_log", self.handle_log)
 
         self.metadata: Optional[Metadata] = None
 
@@ -49,3 +54,18 @@ class AstoriaIntegration(StateConsumer):
                 print_formatted_text("Bad Message from astmetad")
         else:
             print_formatted_text("Bad Message from astmetad")
+
+    async def handle_log(
+            self,
+            match: Match[str],
+            payload: str,
+    ) -> None:
+        """Event handler for metadata changes."""
+        if payload:
+            try:
+                log_event = UsercodeLogBroadcastEvent(**loads(payload))
+                print_formatted_text(log_event.content, end="")
+            except (ValidationError, JSONDecodeError):
+                print_formatted_text("Bad log event")
+        else:
+            print_formatted_text("Bad log event")
