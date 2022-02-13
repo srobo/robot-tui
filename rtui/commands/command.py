@@ -25,7 +25,7 @@ class BaseCommand(metaclass=ABCMeta):
         raise NotImplementedError  # pragma: nocover
 
     @abstractmethod
-    async def exec(self) -> None:
+    async def exec(self, args: List[str]) -> None:
         """Execute the command."""
         raise NotImplementedError  # pragma: nocover
 

@@ -49,7 +49,7 @@ class TUI:
         try:
             com_class = self.commands[command]
             com = com_class(self)
-            await com.exec()
+            await com.exec(args)
         except KeyError:
             # Note: this is theoretically unreachable, as we validate that commands exist
             self.print(f"Unknown command: {command}")  # pragma: nocover

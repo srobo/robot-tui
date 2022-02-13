@@ -9,7 +9,7 @@ class QuitCommand(BaseCommand):
 
     description = "Leave the terminal session."
 
-    async def exec(self) -> None:
+    async def exec(self, args: List[str]) -> None:
         """Execute the command."""
         self._tui.print("Goodbye!")
         self._tui.running = False
