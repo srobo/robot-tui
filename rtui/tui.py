@@ -56,5 +56,6 @@ class TUI:
 
     async def welcome(self) -> None:
         """Print the welcome message."""
-        self.print("Student Robotics OS")
-        self.print("Enter a command, or help to list available commands!")
+        self.print("Student Robotics OS\n")
+        await self.exec_command("help")
+        self.print("")
