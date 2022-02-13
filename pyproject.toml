@@ -18,6 +18,7 @@ classifiers = [
 python = "^3.7"
 click = "^7.1.2"
 prompt-toolkit = "^3.0.28"
+astoria = "^0.8.0"
 
 [tool.poetry.dev-dependencies]
 flake8 = "*"
