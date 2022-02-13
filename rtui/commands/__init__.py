@@ -4,11 +4,13 @@ from typing import Dict, Type
 
 from .command import BaseCommand
 from .help import HelpCommand
+from .metadata import MetadataCommand
 from .quit import QuitCommand
 
 COMMANDS: Dict[str, Type[BaseCommand]] = {
     "exit": QuitCommand,
     "help": HelpCommand,
+    "metadata": MetadataCommand,
     "quit": QuitCommand,
 }
 

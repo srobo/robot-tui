@@ -1,6 +1,10 @@
 """The TUI class."""
 
+import asyncio
+
 from prompt_toolkit import PromptSession, print_formatted_text
+
+from rtui.astoria import AstoriaIntegration
 
 from .commands import COMMANDS
 from .parser import parse_command
@@ -14,6 +18,8 @@ class TUI:
         self._session = self._get_session()
         self.running: bool = True
         self.commands = COMMANDS
+
+        self.astoria = AstoriaIntegration(False, None)
 
     def _get_session(self) -> PromptSession[str]:
         """Get a prompt session."""
@@ -33,6 +39,7 @@ class TUI:
 
     async def run_tui(self) -> None:
         """Run the main loop for the TUI."""
+        asyncio.create_task(self.astoria.run())
         await self.welcome()
         while self.running:
             command = await self._session.prompt_async()
