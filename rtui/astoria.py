@@ -86,3 +86,19 @@ class AstoriaIntegration(StateConsumer):
             print_formatted_text("Unable to kill code.")
             if len(res.reason) > 0:
                 print_formatted_text(res.reason)
+
+    async def restart_usercode(self) -> None:
+        """Restart running usercode."""
+        res = await self._mqtt.manager_request(
+            "astprocd",
+            "restart",
+            ManagerRequest(sender_name=self.name),
+        )
+        if res.success:
+            print_formatted_text("Successfully restarted code.")
+            if len(res.reason) > 0:
+                print_formatted_text(res.reason)
+        else:
+            print_formatted_text("Unable to restart code.")
+            if len(res.reason) > 0:
+                print_formatted_text(res.reason)
