@@ -30,7 +30,6 @@ class BaseCommand(metaclass=ABCMeta):
         raise NotImplementedError  # pragma: nocover
 
     @classmethod
-    @abstractmethod
     def validate_args(cls, command: str, args: List[str]) -> List[str]:
         """
         Validate a list of potential arguments to the command.
@@ -39,4 +38,7 @@ class BaseCommand(metaclass=ABCMeta):
         :param args: a list of arguments to validate.
         :returns: A list of errors to display.
         """
-        raise NotImplementedError  # pragma: nocover
+        if len(args) == 0:
+            return []
+        else:
+            return [f"{command} does not expect any arguments."]

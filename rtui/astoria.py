@@ -6,6 +6,7 @@ from typing import Match, Optional
 from astoria.common.broadcast_event import UsercodeLogBroadcastEvent
 from astoria.common.config import AstoriaConfig
 from astoria.common.consumer import StateConsumer
+from astoria.common.manager_requests import ManagerRequest
 from astoria.common.messages.astmetad import Metadata, MetadataManagerMessage
 from prompt_toolkit import print_formatted_text
 from pydantic import ValidationError
@@ -69,3 +70,19 @@ class AstoriaIntegration(StateConsumer):
                 print_formatted_text("Bad log event")
         else:
             print_formatted_text("Bad log event")
+
+    async def kill_usercode(self) -> None:
+        """Kill running usercode."""
+        res = await self._mqtt.manager_request(
+            "astprocd",
+            "kill",
+            ManagerRequest(sender_name=self.name),
+        )
+        if res.success:
+            print_formatted_text("Successfully killed code.")
+            if len(res.reason) > 0:
+                print_formatted_text(res.reason)
+        else:
+            print_formatted_text("Unable to kill code.")
+            if len(res.reason) > 0:
+                print_formatted_text(res.reason)
