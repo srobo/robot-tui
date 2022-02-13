@@ -2,13 +2,15 @@
 
 from prompt_toolkit import PromptSession, print_formatted_text
 
+from .commands import COMMANDS
+
 
 class TUI:
     """The Terminal User Interface."""
 
     def __init__(self) -> None:
         self._session = self._get_session()
-        self._running: bool = True
+        self.running: bool = True
 
     def _get_session(self) -> PromptSession[str]:
         """Get a prompt session."""
@@ -28,9 +30,15 @@ class TUI:
     async def run_tui(self) -> None:
         """Run the main loop for the TUI."""
         await self.welcome()
-        while self._running:
+        while self.running:
             command = await self._session.prompt_async()
-            self.print(f"Command: {command}")
+            if command:
+                try:
+                    com_class = COMMANDS[command]
+                    com = com_class(self)
+                    await com.exec()
+                except KeyError:
+                    self.print(f"Unknown command: {command}")
 
     async def welcome(self) -> None:
         """Print the welcome message."""
