@@ -1,6 +1,6 @@
 """Base Command classes."""
 from abc import ABCMeta, abstractmethod
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, List
 
 if TYPE_CHECKING:
     from rtui.tui import TUI
@@ -14,15 +14,29 @@ class BaseCommand(metaclass=ABCMeta):
 
     @property
     @abstractmethod
-    def name(self) -> str:
+    def description(self) -> str:
         """
-        Name of the command.
+        Description of the command.
 
-        :returns: The name of the command, lowercase as a single word.
+        Displayed as a single line in the help text.
+
+        :returns: Description of the command.
         """
         raise NotImplementedError  # pragma: nocover
 
     @abstractmethod
     async def exec(self) -> None:
         """Execute the command."""
+        raise NotImplementedError  # pragma: nocover
+
+    @classmethod
+    @abstractmethod
+    def validate_args(cls, command: str, args: List[str]) -> List[str]:
+        """
+        Validate a list of potential arguments to the command.
+
+        :param command: The command that has been called
+        :param args: a list of arguments to validate.
+        :returns: A list of errors to display.
+        """
         raise NotImplementedError  # pragma: nocover
