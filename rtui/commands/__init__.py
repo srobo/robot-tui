@@ -6,6 +6,7 @@ from .command import BaseCommand
 from .quit import QuitCommand
 
 COMMANDS: Dict[str, Type[BaseCommand]] = {
+    "exit": QuitCommand,
     "quit": QuitCommand,
 }
 
