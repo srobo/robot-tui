@@ -13,6 +13,7 @@ class TUI:
     def __init__(self) -> None:
         self._session = self._get_session()
         self.running: bool = True
+        self.commands = COMMANDS
 
     def _get_session(self) -> PromptSession[str]:
         """Get a prompt session."""
@@ -47,7 +48,7 @@ class TUI:
         """
         command, args = parse_command(input)
         try:
-            com_class = COMMANDS[command]
+            com_class = self.commands[command]
             com = com_class(self)
             await com.exec()
         except KeyError:
