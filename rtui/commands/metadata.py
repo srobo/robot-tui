@@ -56,3 +56,17 @@ class ArenaCommand(GetSetMetadataCommand):
 
     description = "Get or set the current arena"
     attribute = "arena"
+
+
+class ModeCommand(GetSetMetadataCommand):
+    """Get or set the robot mode."""
+
+    description = "Get or set the current robot mode (COMP or DEV)"
+    attribute = "mode"
+
+
+class ZoneCommand(GetSetMetadataCommand):
+    """Get or set the zone."""
+
+    description = "Get or set the current zone"
+    attribute = "zone"
