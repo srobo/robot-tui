@@ -6,7 +6,10 @@ from typing import Match, Optional
 from astoria.common.broadcast_event import UsercodeLogBroadcastEvent
 from astoria.common.config import AstoriaConfig
 from astoria.common.consumer import StateConsumer
-from astoria.common.manager_requests import ManagerRequest
+from astoria.common.manager_requests import (
+    ManagerRequest,
+    MetadataSetManagerRequest,
+)
 from astoria.common.messages.astmetad import Metadata, MetadataManagerMessage
 from prompt_toolkit import print_formatted_text
 from pydantic import ValidationError
@@ -100,5 +103,30 @@ class AstoriaIntegration(StateConsumer):
                 print_formatted_text(res.reason)
         else:
             print_formatted_text("Unable to restart code.")
+            if len(res.reason) > 0:
+                print_formatted_text(res.reason)
+
+    async def mutate_metadata(self, attr: str, value: str) -> None:
+        """
+        Mutate the metadata.
+
+        :param attr: The attribute to mutate.
+        :param value: The value to change the attribute to.
+        """
+        res = await self._mqtt.manager_request(
+            "astmetad",
+            "mutate",
+            MetadataSetManagerRequest(
+                sender_name=self.name,
+                attr=attr,
+                value=value,
+            ),
+        )
+        if res.success:
+            print_formatted_text(f"Successfully set {attr} to {value}.")
+            if len(res.reason) > 0:
+                print_formatted_text(res.reason)
+        else:
+            print_formatted_text(f"Unable to set {attr} to {value}.")
             if len(res.reason) > 0:
                 print_formatted_text(res.reason)
