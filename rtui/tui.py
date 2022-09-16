@@ -41,10 +41,13 @@ class TUI:
         """Run the main loop for the TUI."""
         asyncio.create_task(self.astoria.run())
         await self.welcome()
-        while self.running:
-            command = await self._session.prompt_async()
-            if command:
-                await self.exec_command(command)
+        try:
+            while self.running:
+                command = await self._session.prompt_async()
+                if command:
+                    await self.exec_command(command)
+        except EOFError:
+            pass
 
     async def exec_command(self, input: str) -> None:
         """
