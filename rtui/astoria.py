@@ -3,14 +3,15 @@
 from json import JSONDecodeError, loads
 from typing import Match, Optional
 
-from astoria.common.broadcast_event import UsercodeLogBroadcastEvent
+from astoria.common.components import StateConsumer
 from astoria.common.config import AstoriaConfig
-from astoria.common.consumer import StateConsumer
-from astoria.common.manager_requests import (
+from astoria.common.ipc import (
     ManagerRequest,
+    MetadataManagerMessage,
     MetadataSetManagerRequest,
+    UsercodeLogBroadcastEvent,
 )
-from astoria.common.messages.astmetad import Metadata, MetadataManagerMessage
+from astoria.common.metadata import Metadata
 from prompt_toolkit import print_formatted_text
 from pydantic import ValidationError
 
