@@ -13,7 +13,7 @@ from astoria.common.ipc import (
 )
 from astoria.common.metadata import Metadata
 from prompt_toolkit import print_formatted_text
-from pydantic import ValidationError
+from pydantic import ValidationError, parse_obj_as
 
 
 class AstoriaIntegration(StateConsumer):
@@ -53,7 +53,10 @@ class AstoriaIntegration(StateConsumer):
         """Event handler for metadata changes."""
         if payload:
             try:
-                metadata_manager_message = MetadataManagerMessage(**loads(payload))
+                metadata_manager_message = parse_obj_as(
+                    MetadataManagerMessage,
+                    loads(payload),
+                )
                 self.metadata = metadata_manager_message.metadata
             except (ValidationError, JSONDecodeError):
                 print_formatted_text("Bad Message from astmetad")
@@ -68,7 +71,7 @@ class AstoriaIntegration(StateConsumer):
         """Event handler for metadata changes."""
         if payload:
             try:
-                log_event = UsercodeLogBroadcastEvent(**loads(payload))
+                log_event = parse_obj_as(UsercodeLogBroadcastEvent, loads(payload))
                 print_formatted_text(log_event.content, end="")
             except (ValidationError, JSONDecodeError):
                 print_formatted_text("Bad log event")
