@@ -16,7 +16,7 @@ command="/usr/bin/rtui" ssh-ed25519 AAAA....
 
 ## Development
 
-This application is written in Python 3.7+ and is managed using poetry.
+This application is written in Python 3.8+ and is managed using poetry.
 
 ```shell
 poetry install
