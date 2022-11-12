@@ -7,8 +7,8 @@ authors = [
 ]
 license = "MIT"
 readme = "README.md"
-repository = "https://github.com/trickeydan/rtui"
-homepage = "https://github.com/trickeydan/rtui"
+repository = "https://github.com/srobo/robot-tui"
+homepage = "https://github.com/srobo/robot-tui"
 classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
     "Typing :: Typed",
