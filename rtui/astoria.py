@@ -9,9 +9,11 @@ from astoria.common.ipc import (
     ManagerRequest,
     MetadataManagerMessage,
     MetadataSetManagerRequest,
+    StartButtonBroadcastEvent,
     UsercodeLogBroadcastEvent,
 )
 from astoria.common.metadata import Metadata
+from astoria.common.mqtt import BroadcastHelper
 from prompt_toolkit import print_formatted_text
 from pydantic import ValidationError, parse_obj_as
 
@@ -109,6 +111,14 @@ class AstoriaIntegration(StateConsumer):
             print_formatted_text("Unable to restart code.")
             if len(res.reason) > 0:
                 print_formatted_text(res.reason)
+
+    async def trigger_start(self) -> None:
+        """Trigger the virtual start button."""
+        event = BroadcastHelper.get_helper(
+            self._mqtt,
+            StartButtonBroadcastEvent,
+        )
+        event.send()
 
     async def mutate_metadata(self, attr: str, value: str) -> None:
         """
