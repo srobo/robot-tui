@@ -8,6 +8,7 @@ from .kill import KillUsercodeCommand
 from .metadata import ArenaCommand, MetadataCommand, ModeCommand, ZoneCommand
 from .quit import QuitCommand
 from .restart import RestartUsercodeCommand
+from .start import StartTriggerCommand
 
 COMMANDS: Dict[str, Type[BaseCommand]] = {
     "arena": ArenaCommand,
@@ -18,6 +19,8 @@ COMMANDS: Dict[str, Type[BaseCommand]] = {
     "mode": ModeCommand,
     "quit": QuitCommand,
     "restart": RestartUsercodeCommand,
+    "start": StartTriggerCommand,
+    "trigger": StartTriggerCommand,
     "zone": ZoneCommand,
 }
 

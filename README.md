@@ -24,6 +24,8 @@ command="/usr/bin/rtui" ssh-ed25519 AAAA....
 - `mode`: Get or set the current robot mode (COMP or DEV)
 - `quit`: Leave the terminal session.
 - `restart`: Restart running code
+- `start`: Trigger the virtual start button
+- `trigger`: Trigger the virtual start button
 - `zone`: Get or set the current zone
 
 
