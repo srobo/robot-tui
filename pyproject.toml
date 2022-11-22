@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "rtui"
-version = "0.1.0"
+version = "0.1.1"
 description = "Robot Terminal User Interface for Student Robotics Kit"
 authors = [
     "Dan Trickey <srobo-rtui@trickey.io>",
@@ -17,7 +17,7 @@ classifiers = [
 [tool.poetry.dependencies]
 python = "^3.8"
 prompt-toolkit = "^3.0.31"
-astoria = "^0.9.0"
+astoria = "^0.11.1"
 
 [tool.poetry.dev-dependencies]
 flake8 = "*"
